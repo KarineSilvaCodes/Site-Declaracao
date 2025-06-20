@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    --primary: #d4af37; /* Dourado */
+    --secondary: #f8f1f1; /* Branco suave */
+    --dark: #4a4a4a; /* Cinza escuro */
+    --light: #ffffff; /* Branco */
+    --accent: #ff6b6b; /* Vermelho romântico para detalhes */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.dancing-font {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--light);
+    position: relative;
+    overflow: hidden;
+}
+
+.header:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(212, 175, 55, 0.7), 
+        transparent);
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.header p {
+    font-size: 1.5rem;
+    margin-top: 0;
+    font-weight: 300;
+}
+
+/* Heart Divider */
+.heart {
+    position: relative;
+    width: 100px;
+    height: 90px;
+    margin: 0 auto 2rem;
+    transform: scale(1.2);
+}
+
+.heart:before, .heart:after {
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: var(--light);
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+/* Section Styles */
+section {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+section h2:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--primary);
+}
+
+/* Photo Gallery */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    aspect-ratio: 1/1;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.photo-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.1);
+}
+
+.photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: var(--light);
+    padding: 0.8rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.photo-item:hover .photo-caption {
+    transform: translateY(0);
+}
+
+/* Love Letters */
+.love-letter {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 1.8rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    position: relative;
+    border-left: 5px solid var(--primary);
+}
+
+.love-letter h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.signature {
+    text-align: right;
+    color: var(--primary);
+    font-style: italic;
+    margin-top: 1.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+}
+
+/* Music Player */
+.music-player {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 1.8rem;
+    margin: 2rem auto;
+    max-width: 500px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    border-top: 3px solid var(--primary);
+}
+
+.music-player h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.music-player audio {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+}
+
+.note {
+    font-size: 0.8rem;
+    color: #777;
+    font-style: italic;
+}
+
+/* Timeline */
+.memory-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.memory-timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    opacity: 0.3;
+}
+
+.memory-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.memory-item:nth-child(odd) {
+    padding-right: 50%;
+    text-align: right;
+}
+
+.memory-item:nth-child(even) {
+    padding-left: 50%;
+    text-align: left;
+}
+
+.memory-date {
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.memory-content {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.memory-item:after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+.memory-item:nth-child(odd):after {
+    right: -10px;
+}
+
+.memory-item:nth-child(even):after {
+    left: -10px;
+}
+
+/* Special Button */
+.special-section {
+    text-align: center;
+    margin: 3rem auto;
+}
+
+#specialButton {
+    background: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#specialButton:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+}
+
+/* Proposal Popup */
+.proposal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.proposal-box {
+    background: var(--light);
+    padding: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.proposal-box h2 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.proposal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.proposal-button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.yes-btn {
+    background: var(--primary);
+    color: var(--light);
+}
+
+.no-btn {
+    background: #f0f0f0;
+    color: var(--dark);
+}
+
+.proposal-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Floating Hearts */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-heart {
+    position: absolute;
+    opacity: 0;
+    animation: float 15s linear infinite;
+    font-size: 24px;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+    user-select: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    background-color: var(--primary);
+    opacity: 0;
+    z-index: 999;
+    border-radius: 50%;
+}
+
+/* Counter Section */
+.counter-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.time-counter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.time-unit:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+}
+
+.time-unit .number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.time-unit .label {
+    font-size: 0.9rem;
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.love-phrase {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .header h1 {
+        font-size: 2.8rem;
+    }
+    
+    .memory-timeline:before {
+        left: 30px;
+    }
+    
+    .memory-item:nth-child(odd),
+    .memory-item:nth-child(even) {
+        padding-left: 80px;
+        padding-right: 0;
+        text-align: left;
+    }
+    
+    .memory-item:nth-child(odd):after,
+    .memory-item:nth-child(even):after {
+        left: 20px;
+        right: auto;
+    }
+
+    .time-counter {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 3rem 1rem;
+    }
+    
+    .header h1 {
+        font-size: 2.4rem;
+    }
+    
+    .header p {
+        font-size: 1.2rem;
+    }
+    
+    section h2 {
+        font-size: 2rem;
+    }
+    
+    .photo-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .memory-timeline:before {
+        left: 20px;
+    }
+    
+    .memory-item:nth-child(odd) {
+        padding-right: 0;
+        padding-left: 60px;
+    }
+    
+    .memory-item:nth-child(odd):after {
+        left: 10px;
+    }
+    
+    .memory-item:nth-child(even) {
+        padding-left: 60px;
+    }
+    
+    .memory-item:nth-child(even):after {
+        left: 10px;
+    }
+
+    .proposal-box {
+        width: 90%;
+        padding: 2rem 1.5rem;
+    }
+
+    .proposal-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .proposal-button {
+        width: 100%;
+    }
+
+    /* Correção do botão fugitivo */
+    .no-btn {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .love-letter {
+        margin: 1rem 0;
+        padding: 1.2rem;
+    }
+    
+    .memory-content {
+        padding: 1rem;
+    }
+    
+    #specialButton {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .time-counter {
+        grid-template-columns: 1fr;
+    }
+
+    .time-unit {
+        padding: 1rem;
+    }
+
+    .time-unit .number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .memory-date {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adicione no final do seu CSS */
+@media (max-width: 768px) {
+    .no-btn {
+        transition: all 0.4s ease-out !important;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        margin: 10px auto !important;
+        display: block !important;
+    }
+}
