@@ -1,97 +1,62 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Photo data
-    const photos = [
-        {
-            url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "Nosso primeiro encontro"
-        },
-        {
-            url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "Nossa primeira viagem"
-        },
-        {
-            url: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "Pôr do sol juntos"
-        },
-        {
-            url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "Rindo juntos"
-        },
-        {
-            url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "De mãos dadas"
-        },
-        {
-            url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            caption: "Nosso abraço"
-        }
-    ];
-
-    // Love counter - substitua a data pelo início do relacionamento
-    function updateLoveCounter() {
-        const startDate = new Date('2020-01-15'); // SUA DATA AQUI (ANO-MÊS-DIA)
-        const now = new Date();
-        
-        const diff = now - startDate;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const years = Math.floor(days / 365);
-        const months = Math.floor((days % 365) / 30);
-        const remainingDays = days % 30;
-        
-        document.getElementById('loveCounter').innerHTML = `
-            ${years} anos, ${months} meses e ${remainingDays} dias
-        `;
-    }
     
-    function updateLoveCounter() {
-    const startDate = new Date('2020-01-15T00:00:00'); // SUA DATA E HORA AQUI
+    fetch('dados.json')
+        .then(response => response.json()) 
+        .then(data => {
+            initGallery(data.photos);
+            initTimeline(data.memories);
+            initLetters(data.letters);
+        })
+        .catch(error => console.error('Erro ao buscar o JSON:', error));
     
-    function calculateTime() {
-        const now = new Date();
-        const diff = now - startDate;
-        
-        // Cálculos precisos
-        const seconds = Math.floor(diff / 1000) % 60;
-        const minutes = Math.floor(diff / (1000 * 60)) % 60;
-        const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 30;
-        const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30)) % 12;
-        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-        
-        return { years, months, days, hours, minutes, seconds };
-    }
-    
-    function updateDisplay() {
-        const time = calculateTime();
-        document.getElementById('years').textContent = time.years;
-        document.getElementById('months').textContent = time.months;
-        document.getElementById('days').textContent = time.days;
-        document.getElementById('hours').textContent = time.hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = time.minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = time.seconds.toString().padStart(2, '0');
-    }
-    
-    // Atualiza imediatamente e depois a cada segundo
-    updateDisplay();
-    setInterval(updateDisplay, 1000);
-}
-
-// Inicia o contador quando a página carrega
-updateLoveCounter();
-
-
-    // DOM Elements
     const galleryContainer = document.querySelector('.photo-gallery');
     const timelineContainer = document.querySelector('.memory-timeline');
+    const lettersContainer = document.querySelector('.letters-section'); 
+    
     const specialButton = document.getElementById('specialButton');
     const proposalContainer = document.getElementById('proposalContainer');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const floatingHearts = document.querySelector('.floating-hearts');
 
-    // Initialize photo gallery
-    function initGallery() {
-        photos.forEach(photo => {
+    const playMusicButton = document.getElementById('playMusicButton');
+    const loveSong = document.getElementById('loveSong');
+    let isPlaying = false; 
+
+    function updateLoveCounter() {
+        const startDate = new Date('2020-01-15T00:00:00'); 
+        
+        function calculateTime() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 30;
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30)) % 12;
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            
+            return { years, months, days, hours, minutes, seconds };
+        }
+        
+        function updateDisplay() {
+            const time = calculateTime();
+            document.getElementById('years').textContent = time.years;
+            document.getElementById('months').textContent = time.months;
+            document.getElementById('days').textContent = time.days;
+            document.getElementById('hours').textContent = time.hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = time.minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = time.seconds.toString().padStart(2, '0');
+        }
+        
+        updateDisplay();
+        setInterval(updateDisplay, 1000);
+    }
+
+    function initGallery(photosData) {
+        galleryContainer.innerHTML = ''; 
+        photosData.forEach(photo => {
             const photoItem = document.createElement('div');
             photoItem.className = 'photo-item';
             
@@ -109,9 +74,9 @@ updateLoveCounter();
         });
     }
 
-    // Initialize timeline
-    function initTimeline() {
-        memories.forEach((memory, index) => {
+    function initTimeline(memoriesData) {
+        timelineContainer.innerHTML = ''; 
+        memoriesData.forEach(memory => {
             const memoryItem = document.createElement('div');
             memoryItem.className = 'memory-item';
             
@@ -123,7 +88,6 @@ updateLoveCounter();
             memoryContent.className = 'memory-content';
             
             const memoryTitle = document.createElement('h3');
-            memoryTitle.className = 'font-bold mb-2';
             memoryTitle.textContent = memory.title;
             
             const memoryDesc = document.createElement('p');
@@ -138,7 +102,29 @@ updateLoveCounter();
         });
     }
 
-    // Create floating hearts
+    function initLetters(lettersData) {
+        lettersData.forEach(letter => {
+            const letterDiv = document.createElement('div');
+            letterDiv.className = 'love-letter'; 
+
+            const titleH3 = document.createElement('h3');
+            titleH3.textContent = letter.title;
+
+            const textP = document.createElement('p');
+            textP.textContent = letter.text;
+
+            const signatureP = document.createElement('p');
+            signatureP.className = 'signature';
+            signatureP.textContent = '— Com amor, eu';
+
+            letterDiv.appendChild(titleH3);
+            letterDiv.appendChild(textP);
+            letterDiv.appendChild(signatureP);
+            
+            lettersContainer.appendChild(letterDiv);
+        });
+    }
+
     function createFloatingHearts() {
         for (let i = 0; i < 15; i++) {
             const heart = document.createElement('div');
@@ -152,7 +138,6 @@ updateLoveCounter();
         }
     }
 
-    // Create confetti effect
     function createConfetti() {
         for (let i = 0; i < 100; i++) {
             const confetti = document.createElement('div');
@@ -163,13 +148,11 @@ updateLoveCounter();
             confetti.style.height = (Math.random() * 10 + 5) + 'px';
             document.body.appendChild(confetti);
             
-            // Animate confetti
             setTimeout(() => {
                 confetti.style.opacity = '1';
                 confetti.style.transform = `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`;
                 confetti.style.transition = `all ${Math.random() * 3 + 2}s linear`;
                 
-                // Remove confetti after animation
                 setTimeout(() => {
                     confetti.remove();
                 }, 5000);
@@ -177,7 +160,6 @@ updateLoveCounter();
         }
     }
 
-    // Event Listeners
     specialButton.addEventListener('click', function() {
         proposalContainer.style.opacity = '1';
         proposalContainer.style.pointerEvents = 'auto';
@@ -188,16 +170,12 @@ updateLoveCounter();
         proposalContainer.style.pointerEvents = 'none';
         createConfetti();
         
-        // Play romantic sound
-        const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+        const audio = new Audio('musica.mp3');
         audio.play();
         
-        // Change button text
         specialButton.textContent = 'Eu sabia que você diria sim! ❤️';
-        specialButton.style.backgroundColor = '#4CAF50';
     });
 
-    // Brincadeira com o botão "Ainda não"
     noBtn.addEventListener('mouseover', function() {
         const safeArea = {
             x: window.innerWidth * 0.1,
@@ -215,16 +193,9 @@ updateLoveCounter();
         this.style.top = y + 'px';
         
         const messages = [
-            "Tem certeza?",
-            "Tenta de novo!",
-            "Olha direito!",
-            "Você não quer isso",
-            "Errou feio!",
-            "Não é não!",
-            "Cuidado com o que escolhe!",
-            "Eu avisei!",
-            "O SIM tá ali →",
-            "Tá difícil hein?"
+            "Tem certeza?", "Tenta de novo!", "Olha direito!", "Você não quer isso",
+            "Errou feio!", "Não é não!", "Cuidado com o que escolhe!",
+            "Eu avisei!", "O SIM tá ali →", "Tá difícil hein?"
         ];
         this.textContent = messages[Math.floor(Math.random() * messages.length)];
     });
@@ -236,31 +207,18 @@ updateLoveCounter();
         }, 1000);
     });
 
-    // Inicializa todos os componentes
-    initGallery();  // Garante que as fotos apareçam
-    initTimeline();
+    playMusicButton.addEventListener('click', function() {
+        if (isPlaying) {
+            loveSong.pause();
+            isPlaying = false;
+            playMusicButton.innerHTML = 'Tocar Nossa Música <i class="fas fa-play"></i>';
+        } else {
+            loveSong.play();
+            isPlaying = true;
+            playMusicButton.innerHTML = 'Pausar <i class="fas fa-pause"></i>';
+        }
+    });
+    
+    updateLoveCounter();
     createFloatingHearts();
 });
-
-// Criação dos corações flutuantes
-function createFloatingHearts() {
-    const container = document.querySelector('.floating-hearts');
-    const heartCount = 15; // Quantidade de corações
-    
-    for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.innerHTML = '❤️';
-        
-        // Posição e animação aleatórias
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-        heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        heart.style.animationDelay = Math.random() * 5 + 's';
-        
-        container.appendChild(heart);
-    }
-}
-
-// Chame esta função no final do seu DOMContentLoaded
-createFloatingHearts();

@@ -8,18 +8,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Floating hearts background -->
+
     <div class="floating-hearts"></div>
-    <!-- Header Section -->
     <header class="header">
         <div class="heart"></div>
         <h1>Nossa História</h1>
         <p>Um presente do coração</p>
     </header>
     
-    <!-- Main Content -->
     <main>
-        <!-- Introduction -->
         <section class="intro-section">
             <h2>Para o amor da minha vida</h2>
             <p>
@@ -59,63 +56,44 @@
         </div>
         <div class="love-phrase text-xl mt-6 dancing-font">de amor e felicidade</div>
 
-        <!-- Photo Gallery -->
         <section class="gallery-section">
             <h2>Nossos Momentos</h2>
             <div class="photo-gallery">
-                <!-- Photos will be added by JavaScript -->
             </div>
         </section>
         
-        <!-- Love Letters -->
         <section class="letters-section">
             <h2>Minhas Palavras Para Você</h2>
             
-            <div class="love-letter">
-                <h3>Quando te conheci...</h3>
-                <p>
-                    Lembro como se fosse hoje do momento em que nossos olhos se encontraram pela primeira vez. Havia algo mágico naquele instante, como se o universo estivesse sussurrando: "Esta pessoa vai mudar sua vida para sempre."
-                </p>
-                <p class="signature">— Com amor, eu</p>
-            </div>
-            
-            <div class="love-letter">
-                <h3>O que você significa para mim</h3>
-                <p>
-                    Você é meu porto seguro, minha inspiração, meu maior amor. Cada dia ao seu lado é um presente que eu nunca darei por garantido. Seu sorriso ilumina meus dias mais cinzentos e seu amor aquece meu coração como nada mais neste mundo.
-                </p>
-                <p class="signature">— Com amor, eu</p>
-            </div>
         </section>
         
-        <!-- Music Player -->
         <section class="music-section">
             <h2>Nossa Trilha Sonora</h2>
             <div class="music-player">
                 <h3>Nossa Música</h3>
-                <audio id="loveSong" controls>
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Seu navegador não suporta o elemento de áudio.
+                <audio id="loveSong" style="display: none;">
+                    <source src="musica.mp3" type="audio/mpeg"> 
+                   Seu navegador não suporta o elemento de áudio.
                 </audio>
+
+                <button id="playMusicButton" class="special-button-style">
+                    Tocar Nossa Música <i class="fas fa-play"></i>
+                </button>
                 <p class="note">* Esta é uma música de exemplo. Você pode substituir pelo link da música especial de vocês.</p>
             </div>
         </section>
         
-        <!-- Memory Timeline -->
         <section class="timeline-section">
             <h2>Linha do Tempo do Nosso Amor</h2>
             <div class="memory-timeline">
-                <!-- Timeline will be added by JavaScript -->
             </div>
         </section>
         
-        <!-- Special Button -->
         <section class="special-section">
             <button id="specialButton">Clique para uma surpresa</button>
         </section>
     </main>
     
-    <!-- Proposal Popup -->
     <div class="proposal-container" id="proposalContainer">
         <div class="proposal-box">
             <h2>Quer namorar comigo?</h2>
